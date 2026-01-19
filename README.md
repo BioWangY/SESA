@@ -40,5 +40,9 @@ For the three different antibody library inputs mentioned above, users only need
 2. 0_main_sub2.py
 3. 0_main_sub3.py
 
+DEMO:
+The code files for model training and testing are provided in the "SESA_training" folder, with an expected total runtime of less than 30 minutes on a standard desktop computer.
+The test cases are provided in the "example_data" folder, with an expected total runtime of less than 5 minutes on a standard desktop computer.
+
 Notice:
 If there is a need for commercial use, please contact the email: zwcao@fudan.edu.cn.
