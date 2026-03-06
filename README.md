@@ -50,7 +50,12 @@ RUN SESA:
 
 Training Code of SESA:
 	
-	The code files for model training and testing are provided in the "SESA_training" folder, with an expected total runtime of less than 30 minutes on a standard desktop computer.
+	The code files for model training and testing are provided in the "SESA_training" folder, with an expected total runtime of less than 30 minutes on a standard desktop computer. To ensure the traceability of intermediate files, please execute each step's ".py" script in sequence according to the folder order.
+	
+	Note that the CE-blast algorithm was used during the training process (see Qiu, T., Yang, Y., Qiu, J. et al. CE-BLAST makes it possible to compute antigenic similarity for newly emerging pathogens. Nat Commun 9, 1772 (2018). https://doi.org/10.1038/s41467-018-04171-2). The code has been included in the "CEBLAST" file under the corresponding subpath, and this code needs to be executed in a Python2 environment. Please configure a Python2 environment for this purpose (Python 2.7 is recommended, with numpy==1.20.1 required). The code for configuring this environment is as follows:
+	
+		conda create -n CEBlast python=2.7 numpy=1.20.1 -y
+		conda activate CEBlast
 
 Soure data and code:
 	
