@@ -2,8 +2,6 @@ Antibody (Ab) plays critical roles in both therapeutic and diagnostic applicatio
 
 Here, we proposed an in-silico tool, SESA, to screen those Abs targeting a pre-defined epitope area by calculating the physio-chemical complementarity between epitopes and paratope pairs.
 
-We also provide a web-based version of SESA for user convenience.
-
 Configuration Instructions:
 	
 	SESA requires no compilation or installation; simply execute the script file with Python 3 to run it in full. The required dependency packages are listed in the requirements.txt file and as follows:
@@ -92,4 +90,4 @@ Soure data and code:
 
 Notice:
 	
-	If there is a need for commercial use, please contact the email: zwcao@fudan.edu.cn.
+	If there is a need for commercial use, please contact the email: zwcao@fudan.edu.cn. For the convenience of users, we also provide a web-based version of SESA, which is accessible via the URL: https://www.badd-cao.net/sesa/ 
