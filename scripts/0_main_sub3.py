@@ -8,9 +8,9 @@ import sys
 ### The submitted parameters ###
 jobid = sys.argv[1]         # jobid
 SubAgPdbName = sys.argv[2]  # your/path/to/antigen.pdb
-EpitopeChain = sys.argv[3]  # name of the antigen chain (0-9，a-z，A-Z)
+EpitopeChain = sys.argv[3]  # name of the antigen chain ('A'-'Z'，'a'-'z'，'0'-'9')
 EpitopeSite = sys.argv[4]   # epitope resi, e.g. 119,120,122,200,202,203,419,421,422,423,434,437
-ImmuneHost = sys.argv[5]    # immune host，choose from: 'Homo','Mus', and 'Unspecified'
+ImmuneHost = sys.argv[5]    # immune host，choose from: 'Homo', 'Mus', and 'Unspecified'
 HeavyChainFastaName = sys.argv[6]  # your/path/to/abheavychains.fasta
 LightChainFastaName = sys.argv[7]  # your/path/to/ablightchains.fasta
 

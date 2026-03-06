@@ -20,6 +20,8 @@ Configuration Instructions:
 		conda install -c bioconda hmmer=3.3.2 -y
 		cd ANARCI
 		python setup.py install
+	
+	To ensure the proper functioning of ANARCI and SESA, we recommend configuring ANARCI and running SESA in a Linux environment. Please also ensure the unzip tool is in the system path.
 
 Usage:
 
@@ -36,17 +38,44 @@ Usage:
 
 		SESA Score: The binding likelihood scores (ranging from 0 to 1) of these antibodies to the epitope, along with the corresponding ranking of the antibodies.
 
-RUN SESA:
+	For the three different antibody library inputs mentioned above, users only need to execute the corresponding Python script located in the "scripts" folder. The relevant execution commands are listed below. Three example cases are provided in the "user_data" folder, with an expected total runtime of less than 5 minutes on a standard desktop computer.
 
-	To ensure the successful operation of SESA, users are required to install and configure the ANARCI tool in advance and add it to the system path.
-
-	For the three different antibody library inputs mentioned above, users only need to execute the corresponding Python script located in the scripts folder:
-
-	1. 0_main_sub1.py
-	2. 0_main_sub2.py
-	3. 0_main_sub3.py
+	1. To screen against the built-in non-redundant antibody structure library (n=2,867), please run:
+		
+		python 0_main_sub1.py [jobid] [your/path/to/antigen.pdb] [EpitopeChain] [EpitopeSite] [ImmuneHost]
+		
+		for example:
+		
+		python 0_main_sub1.py 'exmaple1' '../user_data/exmaple1/input_files/ag_pdb_file/antigen.pdb' 'A' '119,120,122,200,202,203,419,421,422,423,434,437' 'Unspecified'
+		
+	2. To screen against the user-defined antibody CDR structure library, please run:
+		
+		python 0_main_sub2.py [jobid] [your/path/to/antigen.pdb] [EpitopeChain] [EpitopeSite] [ImmuneHost] [your/path/to/AbZipFile]
+		
+		for example:
+		
+		python 0_main_sub2.py 'exmaple2' '../user_data/exmaple2/input_files/ag_pdb_file/antigen.pdb' 'A' '119,120,122,200,202,203,419,421,422,423,434,437' 'Unspecified' '../user_data/exmaple2/input_files/ab_structure_zip_file_path/test.zip'
+		
+	3. To screen against the user-defined antibody sequence library, please run:
+		
+		python 0_main_sub3.py [jobid] [your/path/to/antigen.pdb] [EpitopeChain] [EpitopeSite] [ImmuneHost] [your/path/to/HeavyChainFasta] [your/path/to/LightChainFasta]
+		
+		for example:
+		
+		python 0_main_sub3.py 'exmaple3' '../user_data/exmaple3/input_files/ag_pdb_file/antigen.pdb' 'A' '119,120,122,200,202,203,419,421,422,423,434,437' 'Unspecified' '../user_data/exmaple2/input_files/ab_seq_file_path/test_heavy.fasta' '../user_data/exmaple2/input_files/ab_seq_file_path/test_light.fasta'
 	
-	The test cases are provided in the "example_data" folder, with an expected total runtime of less than 5 minutes on a standard desktop computer.
+	The meanings of the command-line arguments are as follows.
+		
+		[jobid] Give a name of your job.
+		[your/path/to/antigen.pdb] The path where you placed your antigen pdb file.
+		[EpitopeChain] The epitope chain name of your antigen pdb file, choose from ('A'-'Z'，'a'-'z'，'0'-'9').
+		[EpitopeSite] The comma-separated epitope resi, e.g. '119,120,122,200,202,203,419,421,422,423,434,437'.
+		[ImmuneHost] immune host，choose from: ('Homo', 'Mus', and 'Unspecified'). If the immune host is not specified, the algorithm will use the main SESA model for calculation. When the corresponding immune host is selected, the algorithm will use the corresponding SESA sub-model for calculation.
+		[your/path/to/AbZipFile] The path where you placed your CDR structure file (Please compress the .pdb file into .zip format.).
+		[your/path/to/HeavyChainFasta] The path where you placed your antibody heavy chain sequence file. Please refer to the example file. Paired antibodies in the heavy and light chain .fasta files should have consistent antibody names.
+		[your/path/to/LightChainFasta] The path where you placed your antibody light chain sequence file. Please refer to the example file. Paired antibodies in the heavy and light chain .fasta files should have consistent antibody names.
+	
+	After running the corresponding calculation script, SESA will create an output folder under the relevant job folder and generate an output file containing the SESA scores and rankings.
 
 Training Code of SESA:
 	
@@ -54,8 +83,8 @@ Training Code of SESA:
 	
 	Note that the CE-blast algorithm was used during the training process (see Qiu, T., Yang, Y., Qiu, J. et al. CE-BLAST makes it possible to compute antigenic similarity for newly emerging pathogens. Nat Commun 9, 1772 (2018). https://doi.org/10.1038/s41467-018-04171-2). The code has been included in the "CEBLAST" file under the corresponding subpath, and this code needs to be executed in a Python2 environment. Please configure a Python2 environment for this purpose (Python 2.7 is recommended, with numpy 1.16.5 required). The code for configuring this environment is as follows:
 	
-		conda create -n CEBlast python=2.7 numpy=1.16.5 -y
-		conda activate CEBlast
+		conda create -n CEBlastenv python=2.7 numpy=1.16.5 -y
+		conda activate CEBlastenv
 
 Soure data and code:
 	
