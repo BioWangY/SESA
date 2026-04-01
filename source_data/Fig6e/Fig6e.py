@@ -33,7 +33,7 @@ def plot_score_density(list1, list2, list3, label1, label2, label3, title):
     plt.grid(alpha=0.3, linestyle="--")
     plt.tight_layout()  
     
-    plt.savefig('Fig6j.png', dpi=300)
+    plt.savefig('Fig6e.png', dpi=300)
     plt.show()
 
 # 测试示例
