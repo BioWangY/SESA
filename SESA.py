@@ -10,13 +10,13 @@ from sesa_core.antibody import process_antibody
 from sesa_core.predictor import predict_and_rank
 
 def main():
-    parser = argparse.ArgumentParser(description="SESA: An in-silico tool to screen Abs targeting a pre-defined epitope area.")
+    parser = argparse.ArgumentParser(description="SESA: Screening Epitope-Specific Antibodies.")
     
     parser.add_argument("-ag", "--antigen", required=True, help="Path to your antigen.pdb file")
     parser.add_argument("-c", "--chain", required=True, help="Epitope chain name (e.g., 'A')")
     parser.add_argument("-s", "--sites", required=True, help="Comma-separated epitope residues (e.g., '119,120')")
     parser.add_argument("-m", "--mode", type=int, choices=[1, 2, 3], required=True, 
-                        help="Mode 1: Built-in lib | Mode 2: User zip | Mode 3: User fasta")
+                        help="Mode 1: Built-in lib | Mode 2: User CDR pdb zip | Mode 3: User Fab fasta")
     parser.add_argument("-o", "--output", required=True, help="Path to save the final prediction result (e.g., ./result.tsv)")
     
     parser.add_argument("--host", default="Unspecified", choices=['Homo', 'Mus', 'Unspecified'], 
@@ -35,11 +35,19 @@ def main():
     print(f"--- Starting SESA Pipeline (Mode: {args.mode}) ---")
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_name = {
-        'Homo': 'model_abstructure_homo.model',
-        'Mus': 'model_abstructure_mus.model',
-        'Unspecified': 'model_abstructure_main.model'
-    }[args.host]
+    
+    if args.mode in [1, 2]:
+        model_name = {
+            'Homo': 'model_abstructure_homo.model',
+            'Mus': 'model_abstructure_mus.model',
+            'Unspecified': 'model_abstructure_main.model'
+        }[args.host]
+    else:
+        model_name = {
+            'Homo': 'model_abseq_homo.model',
+            'Mus': 'model_abseq_mus.model',
+            'Unspecified': 'model_abseq_main.model'
+        }[args.host]
     
     selected_model = os.path.join(base_dir, 'models', model_name)
     aaindex_csv = os.path.join(base_dir, 'sesa_core', 'data', 'usedAAindex.csv')
@@ -60,7 +68,7 @@ def main():
         process_antibody(args.mode, cdr_fp_path, aaindex_csv, precalc_lib, temp_dir, 
                          ab_zip=args.ab_zip, heavy=args.heavy, light=args.light)
 
-        print(f"Generating predictions using '{args.host}' model...")
+        print(f"Generating predictions using '{model_name}'...")
 
         out_dir = os.path.dirname(os.path.abspath(args.output))
         if out_dir:

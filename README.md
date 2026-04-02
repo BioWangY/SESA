@@ -51,7 +51,7 @@ Please provide the PDB structure of the target antigen, with antigen chain and t
 
 Mode 1: Built-in non-redundant antibody structure library (n=2,867).
 
-Mode 2: User-defined antibody CDR structure library (.pdb format, compressed into a .zip file).
+Mode 2: User-defined antibody CDR structure library (.pdb format, IMGT numbering, and compressed into a .zip file).
 
 Mode 3: User-defined antibody sequence library (.fasta format).
 
@@ -70,19 +70,19 @@ We provide sample files in the exmaple_data directory. You can test the three mo
 1. Screen against the built-in non-redundant antibody structure library (Mode 1):
 
 ```bash
-python SESA.py -m 1 -ag './exmaple_data/exmaple1/2NXZ.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --host 'Unspecified' -o './result_mode1.tsv'
+python SESA.py -m 1 -ag './exmaple_data/exmaple1/exampleAg.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --host 'Unspecified' -o './result_mode1.tsv'
 ```
 
 2. Screen against a user-defined antibody CDR structure library (Mode 2):
 
 ```bash
-python SESA.py -m 2 -ag './exmaple_data/exmaple2/2NXZ.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --ab_zip './exmaple_data/exmaple2/test.zip' --host 'Unspecified' -o './result_mode2.tsv'
+python SESA.py -m 2 -ag './exmaple_data/exmaple2/exampleAg.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --ab_zip './exmaple_data/exmaple2/test.zip' --host 'Unspecified' -o './result_mode2.tsv'
 ```
 
 3. Screen against a user-defined antibody sequence library (Mode 3):
 
 ```bash
-python SESA.py -m 3 -ag './exmaple_data/exmaple3/2NXZ.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --heavy './exmaple_data/exmaple3/test_heavy.fasta' --light './exmaple_data/exmaple3/test_light.fasta' --host 'Unspecified' -o './result_mode3.tsv'
+python SESA.py -m 3 -ag './exmaple_data/exmaple3/exampleAg.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --heavy './exmaple_data/exmaple3/test_heavy.fasta' --light './exmaple_data/exmaple3/test_light.fasta' --host 'Unspecified' -o './result_mode3.tsv'
 ```
 
 
