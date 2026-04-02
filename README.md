@@ -73,6 +73,8 @@ We provide sample files in the exmaple_data directory. You can test the three mo
 python SESA.py -m 1 -ag './exmaple_data/exmaple1/exampleAg.pdb' -c 'A' -s '119,120,122,200,202,203,419,421,422,423,434,437' --host 'Unspecified' -o './result_mode1.tsv'
 ```
 
+Mode 1 searches the antibody structure library built for SESA. The antibody IDs in the structure library, along with their corresponding PDB IDs and CDR sequences, are listed in sesa_core/data/structure_cdr_lib_ab_info.txt.
+
 2. Screen against a user-defined antibody CDR structure library (Mode 2):
 
 ```bash
